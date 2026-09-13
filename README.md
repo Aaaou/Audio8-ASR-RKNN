@@ -44,6 +44,11 @@ It adds VAD segmentation, bounded 8/16/30-second frontend profiles,
 per-segment KV reset, a memory-safe RK3576 staged worker and FP32/RKNN
 acceptance for the same deployment padding contract.
 
+[silero_vad_long_audio_benchmark.zh-CN.md](silero_vad_long_audio_benchmark.zh-CN.md)
+records the Silero VAD integration, x86 and RK3576 VAD benchmarks, full
+RK3576 per-segment results, FP32/RKNN acceptance, and the explicitly qualified
+15-minute application-level extrapolation.
+
 ## Important entry points
 
 - `board_run_end_to_end_dynamic_buckets.py` — RK3576 full neural runtime.

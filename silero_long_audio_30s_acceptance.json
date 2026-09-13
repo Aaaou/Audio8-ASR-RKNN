@@ -1,0 +1,97 @@
+{
+  "acceptance": {
+    "all_tokens_equal": true,
+    "all_eos_equal": true,
+    "wer_percent": 0.0,
+    "cer_percent": 0.0
+  },
+  "summary": {
+    "segments": 5,
+    "audio_span_ms": 28572.0,
+    "neural_total_ms": 27212.41172714508,
+    "task_wall_total_ms": 66797.56704899046,
+    "text": "Linil's pictures are a sort of. Upguards and Adam paintings. And Mason's exquisite idles are as national as a jingo poem. Mr. Barkett Foster's landscapes smile at one much in the same way that Mr. Cocker used to flash his teeth. And Mister John Collier gives his sitter a cheerful slap on the back. Before he says, like a shampooer in a Turkish bath, next man."
+  },
+  "segments": [
+    {
+      "index": 0,
+      "profile": "s8",
+      "start_ms": 546.0,
+      "end_ms": 2686.0,
+      "tokens_equal": true,
+      "eos_equal": true,
+      "token_count": 10,
+      "text": "Linil's pictures are a sort of.",
+      "neural_ms": 3705.4036489716964,
+      "task_wall_ms": 13264.77698799863,
+      "rss_mib": {
+        "frontend_stage": 1407.7265625,
+        "decoder_stage": 1015.8203125
+      }
+    },
+    {
+      "index": 1,
+      "profile": "s8",
+      "start_ms": 2978.0,
+      "end_ms": 5054.0,
+      "tokens_equal": true,
+      "eos_equal": true,
+      "token_count": 7,
+      "text": "Upguards and Adam paintings.",
+      "neural_ms": 3488.893071989878,
+      "task_wall_ms": 10301.625176995003,
+      "rss_mib": {
+        "frontend_stage": 1430.4765625,
+        "decoder_stage": 1019.80859375
+      }
+    },
+    {
+      "index": 2,
+      "profile": "s8",
+      "start_ms": 5378.0,
+      "end_ms": 10046.0,
+      "tokens_equal": true,
+      "eos_equal": true,
+      "token_count": 16,
+      "text": "And Mason's exquisite idles are as national as a jingo poem.",
+      "neural_ms": 3927.734272030648,
+      "task_wall_ms": 11022.619750998274,
+      "rss_mib": {
+        "frontend_stage": 1560.98046875,
+        "decoder_stage": 1037.109375
+      }
+    },
+    {
+      "index": 3,
+      "profile": "s8",
+      "start_ms": 11490.0,
+      "end_ms": 18718.0,
+      "tokens_equal": true,
+      "eos_equal": true,
+      "token_count": 27,
+      "text": "Mr. Barkett Foster's landscapes smile at one much in the same way that Mr. Cocker used to flash his teeth.",
+      "neural_ms": 9058.730959084642,
+      "task_wall_ms": 15996.021949998976,
+      "rss_mib": {
+        "frontend_stage": 1628.47265625,
+        "decoder_stage": 1067.1484375
+      }
+    },
+    {
+      "index": 4,
+      "profile": "s16",
+      "start_ms": 19746.0,
+      "end_ms": 29118.0,
+      "tokens_equal": true,
+      "eos_equal": true,
+      "token_count": 33,
+      "text": "And Mister John Collier gives his sitter a cheerful slap on the back. Before he says, like a shampooer in a Turkish bath, next man.",
+      "neural_ms": 7031.649775068217,
+      "task_wall_ms": 16212.523182999576,
+      "rss_mib": {
+        "frontend_stage": 1781.45703125,
+        "decoder_stage": 1070.7890625
+      }
+    }
+  ]
+}

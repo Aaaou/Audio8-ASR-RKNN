@@ -80,6 +80,27 @@ def speech_intervals(samples: np.ndarray, threshold_db: float, frame_ms: int, mi
     return merged
 
 
+def silero_intervals(samples: np.ndarray, threshold: float, min_speech_ms: int,
+                     merge_silence_ms: int) -> tuple[list[tuple[int, int]], float, float]:
+    """Run official Silero VAD v6 through its CPU ONNX Runtime wrapper."""
+    import torch
+    from silero_vad import get_speech_timestamps, load_silero_vad
+
+    started = __import__("time").perf_counter()
+    model = load_silero_vad(onnx=True)
+    load_ms = (__import__("time").perf_counter() - started) * 1000
+    started = __import__("time").perf_counter()
+    timestamps = get_speech_timestamps(
+        torch.from_numpy(np.ascontiguousarray(samples)), model,
+        sampling_rate=SAMPLE_RATE, threshold=threshold,
+        min_speech_duration_ms=min_speech_ms,
+        min_silence_duration_ms=merge_silence_ms,
+        return_seconds=False,
+    )
+    infer_ms = (__import__("time").perf_counter() - started) * 1000
+    return [(int(item["start"]), int(item["end"])) for item in timestamps], load_ms, infer_ms
+
+
 def split_interval(start: int, end: int, preferred_seconds: float, maximum_seconds: float,
                    overlap_seconds: float) -> list[tuple[int, int, bool]]:
     preferred = round(preferred_seconds * SAMPLE_RATE)
@@ -105,6 +126,8 @@ def main() -> None:
     parser.add_argument("--audio", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--vad-threshold-db", type=float, default=-42.0)
+    parser.add_argument("--vad-backend", choices=("energy", "silero"), default="energy")
+    parser.add_argument("--silero-threshold", type=float, default=0.5)
     parser.add_argument("--frame-ms", type=int, default=30)
     parser.add_argument("--min-speech-ms", type=int, default=250)
     parser.add_argument("--merge-silence-ms", type=int, default=300)
@@ -121,8 +144,14 @@ def main() -> None:
         raise ValueError(f"expected 16 kHz input, got {rate}; resample before planning")
     if audio.ndim == 2:
         audio = audio.mean(axis=1)
-    intervals = speech_intervals(audio, args.vad_threshold_db, args.frame_ms,
-                                 args.min_speech_ms, args.merge_silence_ms)
+    if args.vad_backend == "energy":
+        started = __import__("time").perf_counter()
+        intervals = speech_intervals(audio, args.vad_threshold_db, args.frame_ms,
+                                     args.min_speech_ms, args.merge_silence_ms)
+        vad_load_ms, vad_infer_ms = 0.0, (__import__("time").perf_counter() - started) * 1000
+    else:
+        intervals, vad_load_ms, vad_infer_ms = silero_intervals(
+            audio, args.silero_threshold, args.min_speech_ms, args.merge_silence_ms)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     segments: list[Segment] = []
     for start, end in intervals:
@@ -141,7 +170,9 @@ def main() -> None:
         "version": 1,
         "audio": str(args.audio),
         "sample_rate": SAMPLE_RATE,
-        "vad": {"implementation": "energy", "threshold_db": args.vad_threshold_db,
+        "vad": {"implementation": args.vad_backend, "threshold_db": args.vad_threshold_db,
+                "silero_threshold": args.silero_threshold, "load_ms": vad_load_ms,
+                "inference_ms": vad_infer_ms,
                 "frame_ms": args.frame_ms, "min_speech_ms": args.min_speech_ms,
                 "merge_silence_ms": args.merge_silence_ms},
         "chunking": {"preferred_seconds": args.preferred_seconds, "maximum_seconds": args.maximum_seconds,
