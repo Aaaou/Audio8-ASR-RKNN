@@ -30,9 +30,19 @@ class StaticAudioEncoderBucket(torch.nn.Module):
         self.frames_per_chunk = 100
         self.tokens_per_chunk = 13
         self.total_tokens = self.chunks * self.tokens_per_chunk
+        # Upstream does not attend across an arbitrarily long audio input.
+        # It groups 100-frame chunks into n_window_infer (=800 frame) windows.
+        # F800 therefore has one 104-token window, while F3000 has
+        # [104,104,104,78].  Keeping this boundary is essential: a single
+        # [0,total_tokens] sequence happens to match F800 but is wrong above it.
+        chunks_per_window = int(audio_encoder.n_window_infer) // self.frames_per_chunk
+        window_tokens = chunks_per_window * self.tokens_per_chunk
+        cu = [0]
+        while cu[-1] < self.total_tokens:
+            cu.append(min(cu[-1] + window_tokens, self.total_tokens))
         self.register_buffer(
             "cu_seqlens",
-            torch.tensor([0, self.total_tokens], dtype=torch.int32),
+            torch.tensor(cu, dtype=torch.int32),
             persistent=False,
         )
 

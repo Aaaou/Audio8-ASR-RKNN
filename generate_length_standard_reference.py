@@ -18,6 +18,8 @@ def main() -> None:
     p.add_argument("--audio", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--max-new", type=int, default=400)
+    p.add_argument("--audio-max-seconds", type=float, default=8)
+    p.add_argument("--audio-padding", choices=("longest", "max_length"), default="max_length")
     a = p.parse_args()
 
     torch.set_grad_enabled(False)
@@ -32,8 +34,8 @@ def main() -> None:
     ]}]
     batch = dict(processor.apply_chat_template(
         conversation, return_tensors="pt", sampling_rate=16000,
-        audio_padding="max_length", add_generation_prompt=True,
-        audio_max_length=128000,
+        audio_padding=a.audio_padding, add_generation_prompt=True,
+        audio_max_length=round(a.audio_max_seconds * 16000),
         text_kwargs={"padding": "longest", "truncation": True, "max_length": 1000},
     ))
     prompt_tokens = int(batch["input_ids"].shape[1])

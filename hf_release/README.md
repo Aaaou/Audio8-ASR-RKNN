@@ -30,16 +30,19 @@ The release layout is intentionally explicit:
 ```text
 audio8-asr-rknn-rk3576/
 ├── encoder/audio_encoder_f800_fp16.rknn
+├── encoder/audio_encoder_f3000_fp16.rknn
 ├── adapter/
 │   ├── audio_adapter_h104_t25_fp16.rknn
 │   ├── audio_adapter_h104_t50_fp16.rknn
 │   ├── audio_adapter_h104_t75_fp16.rknn
-│   └── audio_adapter_h104_t100_fp16.rknn
+│   ├── audio_adapter_h104_t100_fp16.rknn
+│   └── audio_adapter_h390_t375_fp16.rknn
 ├── prefill/
 │   ├── prefill_kv_s35_fp16.rknn
 │   ├── prefill_kv_s60_fp16.rknn
 │   ├── prefill_kv_s85_fp16.rknn
-│   └── prefill_kv_s110_fp16.rknn
+│   ├── prefill_kv_s110_fp16.rknn
+│   └── prefill_kv_s385_fp16.rknn
 ├── decoder/
 │   ├── kv/layer0..layer7/kv_fp16.rknn
 │   ├── block_s128/layer0..layer7/block_fp16.rknn
@@ -107,10 +110,30 @@ For each audio length, select matching static components:
 | 4 s | 50 | T50 | S60 |
 | 6 s | 75 | T75 | S85 |
 | 8 s | 100 | T100 | S110 |
+| 30 s (official cap path) | 375 | H390/T375 | S385 |
 
 The adapter output count must exactly equal the audio-placeholder count.  Do
 not take the first N values from T100 for a shorter prompt: that changes the
 upstream adaptive-pooling semantics and is incorrect.
+
+The 30-second graph is the official-example alignment path: use the upstream
+processor with `audio_padding="longest"` and `audio_max_length=30*16000`.  An
+exact 30-second 16 kHz input produces mel `[128,3000]`, 375 audio placeholders,
+and a 385-token prefill.  Pass all three long-input graph paths explicitly:
+
+```bash
+python3 runtime/board_run_end_to_end_dynamic_buckets.py \
+  --input-dir prefill_input_official30 \
+  --encoder-rknn encoder/audio_encoder_f3000_fp16.rknn \
+  --adapter-rknn adapter/audio_adapter_h390_t375_fp16.rknn \
+  --prefill-rknn prefill/prefill_kv_s385_fp16.rknn \
+  --asset-root . \
+  --model /path/to/upstream-Audio8-ASR-0.1B \
+  --output result_30s.json
+```
+
+The runtime selects S512 as the initial decoder cache bucket because the
+prefill length is 385.
 
 Example board invocation after preparing an S85 input:
 
@@ -139,6 +162,7 @@ PyTorch CPU FP32 greedy reference; thus NPU-vs-FP32 CER/WER was 0%/0%.
 | 4 s | 60 | 128 | 3371.87 ms | 0.843 | 1114.12 MiB |
 | 6 s | 85 | 128 | 4116.86 ms | 0.686 | 1116.10 MiB |
 | 8 s | 110 | 128 → 256 | 4344.29 ms | 0.543 | 1232.23 MiB |
+| 30 s, official processor cap | 385 | 512 initial | 22121.31 ms | 0.737 | 1206.16 MiB |
 
 `Steady neural E2E` includes encoder, adapter, prefill, decoder RKNN calls,
 CPU K/V writes and any cache migration.  It excludes model loading/runtime
@@ -151,6 +175,13 @@ real 6-second prefill, triggering both `128→256` and `256→512`.  All 181 NPU
 tokens matched FP32; cache copies cost 11.21 ms and 34.70 ms respectively, and
 the final RSS was 1379.02 MiB.  This validates cache scheduling, not ASR text
 quality beyond EOS.
+
+The 30-second run is a real EOS run, not stress-only: 85/85 greedy RKNN token
+ids exactly match the original PyTorch CPU FP32 official-processor reference,
+including EOS.  Its component latencies were encoder 1603.81 ms, adapter
+180.33 ms, prefill 477.05 ms, decoder NPU calls 19835.14 ms, and CPU K/V writes
+24.99 ms.  The full process wall time, including model initialization, was
+32459.20 ms.
 
 ## Reproducibility source archive
 

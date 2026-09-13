@@ -20,19 +20,18 @@ from transformers import AutoModelForCausalLM
 
 
 class StaticAudioAdapterBucket(torch.nn.Module):
-    def __init__(self, tower: torch.nn.Module, projector: torch.nn.Module, tokens: int) -> None:
+    def __init__(self, tower: torch.nn.Module, projector: torch.nn.Module, input_frames: int, tokens: int) -> None:
         super().__init__()
         self.tower = tower
         self.projector = projector
         self.tokens = int(tokens)
-        # ONNX's PyTorch exporter does not support adaptive_avg_pool1d when
-        # 104 is not divisible by 100.  For this intentionally static bucket,
-        # construct its exact bin-average matrix once.  Row j is the interval
-        # [floor(j*104/100), ceil((j+1)*104/100)), exactly matching PyTorch.
-        pooling = torch.zeros(self.tokens, 104, dtype=torch.float32)
+        self.input_frames = int(input_frames)
+        # ONNX's exporter cannot express every adaptive_avg_pool1d ratio.
+        # For this static bucket, construct its exact bin-average matrix.
+        pooling = torch.zeros(self.tokens, self.input_frames, dtype=torch.float32)
         for token in range(self.tokens):
-            begin = (token * 104) // self.tokens
-            end = ((token + 1) * 104 + self.tokens - 1) // self.tokens
+            begin = (token * self.input_frames) // self.tokens
+            end = ((token + 1) * self.input_frames + self.tokens - 1) // self.tokens
             pooling[token, begin:end] = 1.0 / (end - begin)
         self.register_buffer("pooling", pooling, persistent=False)
 
@@ -63,10 +62,14 @@ def main() -> None:
     model = AutoModelForCausalLM.from_pretrained(
         args.model, trust_remote_code=True, torch_dtype=torch.float32, attn_implementation="eager"
     ).eval()
-    adapter = StaticAudioAdapterBucket(model.audio_mlp_tower, model.audio_projector, args.tokens).eval()
     source_files = sorted(args.encoder_references.glob("sample_*_reference.npy"))[: args.calibration_samples]
     if not source_files:
         raise FileNotFoundError(f"no encoder reference tensors in {args.encoder_references}")
+    first_source = np.load(source_files[0]).astype(np.float32, copy=False)
+    if first_source.ndim != 2 or first_source.shape[1] != 1024:
+        raise ValueError(f"{source_files[0]}: expected [time,1024], got {first_source.shape}")
+    input_frames = int(first_source.shape[0])
+    adapter = StaticAudioAdapterBucket(model.audio_mlp_tower, model.audio_projector, input_frames, args.tokens).eval()
 
     output = args.output
     calibration_dir = output / "calibration"
@@ -74,8 +77,8 @@ def main() -> None:
     dataset_lines: list[str] = []
     for index, source_path in enumerate(source_files):
         source = np.load(source_path).astype(np.float32, copy=False)
-        if source.shape != (104, 1024):
-            raise ValueError(f"{source_path}: expected [104,1024], got {source.shape}")
+        if source.shape != (input_frames, 1024):
+            raise ValueError(f"{source_path}: expected [{input_frames},1024], got {source.shape}")
         with torch.inference_mode():
             reference = adapter(torch.from_numpy(source))
         input_path = calibration_dir / f"sample_{index:02d}_input.npy"
@@ -88,7 +91,7 @@ def main() -> None:
                         "output_shape": list(reference.shape)})
 
     output.mkdir(parents=True, exist_ok=True)
-    onnx_path = output / f"audio_adapter_h104_t{args.tokens}.onnx"
+    onnx_path = output / f"audio_adapter_h{input_frames}_t{args.tokens}.onnx"
     example = torch.from_numpy(np.load(samples[0]["input"]))
     torch.onnx.export(adapter, (example,), onnx_path, input_names=["audio_hidden"],
                       output_names=["audio_embeddings"], opset_version=19,
@@ -97,7 +100,7 @@ def main() -> None:
     onnx.checker.check_model(graph)
     (output / "dataset.txt").write_text("\n".join(dataset_lines) + "\n", encoding="utf-8")
     (output / "manifest.json").write_text(json.dumps({
-        "model": str(args.model), "onnx": str(onnx_path), "tokens": args.tokens,
+        "model": str(args.model), "onnx": str(onnx_path), "input_frames": input_frames, "tokens": args.tokens,
         "dataset": str(output / "dataset.txt"), "samples": samples,
     }, indent=2), encoding="utf-8")
     print(json.dumps({"onnx": str(onnx_path), "samples": len(samples), "output_shape": samples[0]["output_shape"]}))
