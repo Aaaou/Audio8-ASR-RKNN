@@ -1,0 +1,83 @@
+{
+  "backend": "onnxruntime CPUExecutionProvider",
+  "model": "audio_encoder_f800_cpu_fp16_ort.onnx",
+  "input_type": "tensor(float16)",
+  "output_type": "tensor(float16)",
+  "runs_per_sample": 2,
+  "rss_mib_after_load": 1632.1953125,
+  "rss_mib_peak": 1767.09375,
+  "samples": [
+    {
+      "index": 0,
+      "mean_inference_s": 2.7591053649957757,
+      "min_inference_s": 2.749004616984166,
+      "cosine": 0.999998188073265,
+      "normalized_l2": 0.0008354827475674415,
+      "mae": 1.1246769645367749e-05,
+      "max_abs": 0.0001501142978668213
+    },
+    {
+      "index": 1,
+      "mean_inference_s": 2.7595738874806557,
+      "min_inference_s": 2.7545150429941714,
+      "cosine": 0.9999980483445257,
+      "normalized_l2": 0.0006725213431362836,
+      "mae": 9.384327313455287e-06,
+      "max_abs": 0.00013073068112134933
+    },
+    {
+      "index": 2,
+      "mean_inference_s": 2.777829356986331,
+      "min_inference_s": 2.7626223919796757,
+      "cosine": 0.9999987933630492,
+      "normalized_l2": 0.0006229512146473584,
+      "mae": 8.526009878551122e-06,
+      "max_abs": 0.00010831281542778015
+    },
+    {
+      "index": 3,
+      "mean_inference_s": 2.791266265005106,
+      "min_inference_s": 2.7804290379863232,
+      "cosine": 0.9999984186407072,
+      "normalized_l2": 0.0008735313498825217,
+      "mae": 9.937721188180149e-06,
+      "max_abs": 0.0004233717918395996
+    },
+    {
+      "index": 4,
+      "mean_inference_s": 2.7860331805131864,
+      "min_inference_s": 2.779893508995883,
+      "cosine": 0.9999979609190468,
+      "normalized_l2": 0.0009115115981128491,
+      "mae": 1.1147139957756735e-05,
+      "max_abs": 0.00019597262144088745
+    },
+    {
+      "index": 5,
+      "mean_inference_s": 2.7798733009549323,
+      "min_inference_s": 2.759442765964195,
+      "cosine": 0.9999980317398784,
+      "normalized_l2": 0.0009345461906164922,
+      "mae": 1.1771280696848407e-05,
+      "max_abs": 0.00022740289568901062
+    },
+    {
+      "index": 6,
+      "mean_inference_s": 2.754564570990624,
+      "min_inference_s": 2.743366946990136,
+      "cosine": 0.9999975127045148,
+      "normalized_l2": 0.0008132225421898461,
+      "mae": 1.080681977327913e-05,
+      "max_abs": 0.00017439061775803566
+    },
+    {
+      "index": 7,
+      "mean_inference_s": 2.758388509042561,
+      "min_inference_s": 2.7513177760411054,
+      "cosine": 0.9999988320072555,
+      "normalized_l2": 0.0006333431057185097,
+      "mae": 8.93619562702952e-06,
+      "max_abs": 0.00010252930223941803
+    }
+  ]
+}

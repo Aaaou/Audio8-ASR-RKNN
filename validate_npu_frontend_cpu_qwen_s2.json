@@ -1,0 +1,43 @@
+{
+  "scope": "CPU Qwen2 prefill fed by CPU or frozen FP16 NPU frontend embeddings",
+  "samples": [
+    {
+      "id": "1272-128104-0000",
+      "embedding": {
+        "normalized_l2": 0.008472158774704912,
+        "max_abs": 0.09442901611328125,
+        "cosine": 0.9999643904557447,
+        "argmax_match": true,
+        "actual_argmax": 15206,
+        "reference_argmax": 15206
+      },
+      "cpu_qwen_logits": {
+        "normalized_l2": 0.0060998379516675055,
+        "max_abs": 0.08093857765197754,
+        "cosine": 0.9999865543313153,
+        "argmax_match": true,
+        "actual_argmax": 12275,
+        "reference_argmax": 12275
+      }
+    },
+    {
+      "id": "1272-128104-0001",
+      "embedding": {
+        "normalized_l2": 0.01232946328165604,
+        "max_abs": 0.15278935432434082,
+        "cosine": 0.9999241995393574,
+        "argmax_match": true,
+        "actual_argmax": 15718,
+        "reference_argmax": 15718
+      },
+      "cpu_qwen_logits": {
+        "normalized_l2": 0.006239032478956989,
+        "max_abs": 0.20716190338134766,
+        "cosine": 0.9999819377617639,
+        "argmax_match": true,
+        "actual_argmax": 32663,
+        "reference_argmax": 32663
+      }
+    }
+  ]
+}

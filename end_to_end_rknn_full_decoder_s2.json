@@ -1,0 +1,36 @@
+{
+  "complete_to_eos": true,
+  "eos_ids": [
+    151645
+  ],
+  "generated_tokens": 13,
+  "tokens": [
+    32663,
+    374,
+    91608,
+    3406,
+    2044,
+    594,
+    11566,
+    2686,
+    7040,
+    1091,
+    806,
+    4925,
+    13,
+    151645
+  ],
+  "latency_ms": {
+    "encoder": 395.44493699941086,
+    "adapter": 45.24731199853704,
+    "prefill": 105.62999800094985,
+    "decode_npu_per_token": 157.66772791959318,
+    "cpu_kv_write_per_token": 0.3248311538929836,
+    "end_to_end": 11179.817151998577
+  },
+  "placement": "all neural compute uses RKNN NPU; CPU does embedding lookup, RoPE/mask, KV writes and argmax",
+  "rss_mib": {
+    "before": 35.23046875,
+    "after": 1133.765625
+  }
+}

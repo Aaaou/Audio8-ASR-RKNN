@@ -1,0 +1,45 @@
+{
+  "backend": "PyTorch CPU FP32 original model",
+  "normalization": "lowercase, punctuation removed, whitespace collapsed; CER excludes spaces",
+  "samples": [
+    {
+      "index": 0,
+      "id": "1272-128104-0000",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/00_1272-128104-0000.wav",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "sampling_rate": 16000,
+      "speech_duration_s": 5.855,
+      "duration_s": 8.0,
+      "hypothesis": "Mr. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+      "reference_normalized": "mister quilter is the apostle of the middle classes and we are glad to welcome his gospel",
+      "hypothesis_normalized": "mr quilter is the apostle of the middle classes and we are glad to welcome his gospel",
+      "wer": 0.058823529411764705,
+      "cer": 0.0547945205479452,
+      "elapsed_s": 1.2329493059999095,
+      "rtf": 0.15411866324998869
+    },
+    {
+      "index": 1,
+      "id": "1272-128104-0001",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/01_1272-128104-0001.wav",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "sampling_rate": 16000,
+      "speech_duration_s": 4.815,
+      "duration_s": 8.0,
+      "hypothesis": "Nor is Mister Quilter's manner less interesting than his matter.",
+      "reference_normalized": "nor is mister quilter s manner less interesting than his matter",
+      "hypothesis_normalized": "nor is mister quilter s manner less interesting than his matter",
+      "wer": 0.0,
+      "cer": 0.0,
+      "elapsed_s": 0.7462593420000303,
+      "rtf": 0.09328241775000379
+    }
+  ],
+  "aggregate": {
+    "wer": 0.03571428571428571,
+    "cer": 0.031746031746031744,
+    "total_audio_s": 16.0,
+    "total_transcribe_s": 1.9792086479999398,
+    "rtf": 0.12370054049999624
+  }
+}

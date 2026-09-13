@@ -1,0 +1,22 @@
+{
+  "reference": "original Audio8-ASR CPU FP32 audio encoder",
+  "candidate": "RK3576 FP16 RKNN encoder",
+  "samples": [
+    {
+      "index": 0,
+      "id": "1272-128104-0000",
+      "cosine": 0.9999359706985533,
+      "normalized_l2": 0.011280550061769971,
+      "mae": 0.00017868704162538052,
+      "max_abs": 0.002022121101617813
+    },
+    {
+      "index": 1,
+      "id": "1272-128104-0001",
+      "cosine": 0.9997873663449128,
+      "normalized_l2": 0.02053939260795329,
+      "mae": 0.0002596328849904239,
+      "max_abs": 0.010739482939243317
+    }
+  ]
+}

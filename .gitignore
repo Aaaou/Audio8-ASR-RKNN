@@ -1,0 +1,13 @@
+# Generated model artifacts and tensor captures belong in the Hugging Face release,
+# not in the lightweight source-and-results Git archive.
+*.onnx
+*.rknn
+*.npy
+*.log
+__pycache__/
+*.pyc
+
+# Large source-model snapshots and local virtual-environment files
+model/
+calibration/
+length_test_audio/

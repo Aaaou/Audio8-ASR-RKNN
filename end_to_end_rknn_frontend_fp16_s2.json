@@ -1,0 +1,45 @@
+{
+  "backend": "RK3576 FP16 RKNN encoder + FP16 RKNN audio MLP tower/projector + PyTorch CPU FP32 Qwen2 decoder",
+  "fixed_audio_seconds": 8,
+  "samples": [
+    {
+      "index": 0,
+      "id": "1272-128104-0000",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/00_1272-128104-0000.wav",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "sampling_rate": 16000,
+      "speech_duration_s": 5.855,
+      "duration_s": 8.0,
+      "hypothesis": "Mr. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+      "encoder_s": 0.40365726600020935,
+      "adapter_s": 0.045786580000367394,
+      "qwen2_decoder_s": 10.911028050999448,
+      "generated_tokens": 23,
+      "wer": 0.058823529411764705,
+      "cer": 0.0547945205479452
+    },
+    {
+      "index": 1,
+      "id": "1272-128104-0001",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/01_1272-128104-0001.wav",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "sampling_rate": 16000,
+      "speech_duration_s": 4.815,
+      "duration_s": 8.0,
+      "hypothesis": "Nor is Mister Quilter's manner less interesting than his matter.",
+      "encoder_s": 0.43702059599991117,
+      "adapter_s": 0.05899655100029122,
+      "qwen2_decoder_s": 6.961016156999904,
+      "generated_tokens": 14,
+      "wer": 0.0,
+      "cer": 0.0
+    }
+  ],
+  "aggregate": {
+    "wer": 0.03571428571428571,
+    "cer": 0.031746031746031744,
+    "mean_encoder_s": 0.42033893100006026,
+    "mean_adapter_s": 0.05239156550032931,
+    "mean_qwen2_decoder_s": 8.936022103999676
+  }
+}

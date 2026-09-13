@@ -1,0 +1,41 @@
+{
+  "cache_length": 110,
+  "runs": 20,
+  "rss_mib": {
+    "before_rknn": 43.94921875,
+    "after_rknn_init": 453.96484375,
+    "after_runs": 481.4453125
+  },
+  "io_bytes": {
+    "token_embedding": 2048,
+    "past_cache_input": 3604480,
+    "logits_output": 607744,
+    "kv_delta_output": 32768,
+    "cpu_updated_cache": 3637248
+  },
+  "dtypes": {
+    "inputs": [
+      "float32"
+    ],
+    "outputs": [
+      "float32"
+    ]
+  },
+  "latency_ms": {
+    "rknn_end_to_end_mean": 97.67528144989228,
+    "rknn_end_to_end_p50": 100.99923750021844,
+    "rknn_end_to_end_p95": 130.11327884960338,
+    "cpu_cache_concat_mean": 3.6317313999461476,
+    "cpu_cache_concat_p95": 5.759518199556624
+  },
+  "logits": {
+    "normalized_l2": 1.1316406394788296,
+    "reference_argmax": 13,
+    "rknn_argmax": 3711,
+    "argmax_match": false
+  },
+  "kv_delta": {
+    "max_normalized_l2": 1.435610175483725,
+    "mean_normalized_l2": 0.9201763464598132
+  }
+}

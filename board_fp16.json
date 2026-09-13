@@ -1,0 +1,112 @@
+{
+  "runs_per_sample": 30,
+  "warmup_shape": [
+    100,
+    512
+  ],
+  "samples": [
+    {
+      "input": "calibration/sample_00_input.npy",
+      "reference": "calibration/sample_00_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.04290008544921875,
+      "mean_abs": 0.0009721655851990362,
+      "normalized_l2": 0.0013595585383983986,
+      "cosine": 0.9999991083099525
+    },
+    {
+      "input": "calibration/sample_01_input.npy",
+      "reference": "calibration/sample_01_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.03985404968261719,
+      "mean_abs": 0.0009434957086023133,
+      "normalized_l2": 0.0012709668710655622,
+      "cosine": 0.999999216031643
+    },
+    {
+      "input": "calibration/sample_02_input.npy",
+      "reference": "calibration/sample_02_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.05471611022949219,
+      "mean_abs": 0.0010676542916553443,
+      "normalized_l2": 0.001470607553491593,
+      "cosine": 0.9999989221308789
+    },
+    {
+      "input": "calibration/sample_03_input.npy",
+      "reference": "calibration/sample_03_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.0348052978515625,
+      "mean_abs": 0.0009499119049860383,
+      "normalized_l2": 0.001257801581958672,
+      "cosine": 0.9999992193563597
+    },
+    {
+      "input": "calibration/sample_04_input.npy",
+      "reference": "calibration/sample_04_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.043834686279296875,
+      "mean_abs": 0.0008801896014460908,
+      "normalized_l2": 0.0013213174740961684,
+      "cosine": 0.9999991271393116
+    },
+    {
+      "input": "calibration/sample_05_input.npy",
+      "reference": "calibration/sample_05_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.037952423095703125,
+      "mean_abs": 0.0008166020263752216,
+      "normalized_l2": 0.0012769495173092782,
+      "cosine": 0.9999992208647771
+    },
+    {
+      "input": "calibration/sample_06_input.npy",
+      "reference": "calibration/sample_06_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.042255401611328125,
+      "mean_abs": 0.0008424559628122097,
+      "normalized_l2": 0.0012829723945798357,
+      "cosine": 0.9999991802303855
+    },
+    {
+      "input": "calibration/sample_07_input.npy",
+      "reference": "calibration/sample_07_reference.npy",
+      "output_shape": [
+        100,
+        512
+      ],
+      "max_abs": 0.04203987121582031,
+      "mean_abs": 0.0008798493723043066,
+      "normalized_l2": 0.0012834046142719139,
+      "cosine": 0.9999991803632363
+    }
+  ],
+  "latency_ms": {
+    "mean": 54.23793992500047,
+    "p50": 51.99642650018177,
+    "p95": 68.74865854995278,
+    "min": 44.208379999872705,
+    "max": 72.74741300034293
+  }
+}

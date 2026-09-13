@@ -1,0 +1,18 @@
+{
+  "backend": "original PyTorch CPU FP32 eager",
+  "audio": "/root/audio8-asr/length_test_audio/s2.wav",
+  "prefill_sequence": 35,
+  "tokens": [
+    2183,
+    2044,
+    374,
+    38471,
+    273,
+    13,
+    151645
+  ],
+  "complete_to_eos": true,
+  "eos_id": 151645,
+  "text": "Quilter is apostle.",
+  "generation_wall_ms": 604.8117210000328
+}

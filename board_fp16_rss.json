@@ -1,0 +1,94 @@
+{
+  "schema": "audio8-asr-rk3576-audio-encoder-v1",
+  "model": "audio_encoder_f800_fp16.rknn",
+  "manifest": "manifest.json",
+  "load_s": 0.45989246998215094,
+  "init_s": 1.108114818984177,
+  "rss_mib_after_load": 410.8515625,
+  "rss_mib_after_init": 866.96875,
+  "rss_mib_peak": 889.06640625,
+  "repeat": 3,
+  "data_format": "none",
+  "samples": [
+    {
+      "index": 0,
+      "mean_inference_s": 0.41136818400506553,
+      "min_inference_s": 0.40967328200349584,
+      "finite": true,
+      "cosine": 0.9999070337446452,
+      "normalized_l2": 0.013672883519096716,
+      "mae": 0.0001977842394571891,
+      "max_abs": 0.0022302567958831787
+    },
+    {
+      "index": 1,
+      "mean_inference_s": 0.40870045565922436,
+      "min_inference_s": 0.40512207901338115,
+      "finite": true,
+      "cosine": 0.9999292737602061,
+      "normalized_l2": 0.011893412856627351,
+      "mae": 0.00017577352167083774,
+      "max_abs": 0.0014592483639717102
+    },
+    {
+      "index": 2,
+      "mean_inference_s": 0.4137764730063888,
+      "min_inference_s": 0.4129329170100391,
+      "finite": true,
+      "cosine": 0.9999297499184209,
+      "normalized_l2": 0.011854603424722396,
+      "mae": 0.00016574286502155303,
+      "max_abs": 0.0017719492316246033
+    },
+    {
+      "index": 3,
+      "mean_inference_s": 0.41344460398734856,
+      "min_inference_s": 0.4115972389699891,
+      "finite": true,
+      "cosine": 0.9999155573550342,
+      "normalized_l2": 0.013011519419416901,
+      "mae": 0.0001789793893320218,
+      "max_abs": 0.0023132581263780594
+    },
+    {
+      "index": 4,
+      "mean_inference_s": 0.40966276832235354,
+      "min_inference_s": 0.4083766789990477,
+      "finite": true,
+      "cosine": 0.9999040333333857,
+      "normalized_l2": 0.013865296426121316,
+      "mae": 0.00017813494619745872,
+      "max_abs": 0.0026714876294136047
+    },
+    {
+      "index": 5,
+      "mean_inference_s": 0.40555021799324703,
+      "min_inference_s": 0.405002795974724,
+      "finite": true,
+      "cosine": 0.9998597695900299,
+      "normalized_l2": 0.016799689327396873,
+      "mae": 0.00019877733867612601,
+      "max_abs": 0.0068938471376895905
+    },
+    {
+      "index": 6,
+      "mean_inference_s": 0.4073680349974893,
+      "min_inference_s": 0.40502327599097043,
+      "finite": true,
+      "cosine": 0.9999177604725268,
+      "normalized_l2": 0.012842442031918987,
+      "mae": 0.0001788047389267556,
+      "max_abs": 0.00233406201004982
+    },
+    {
+      "index": 7,
+      "mean_inference_s": 0.4110194283227126,
+      "min_inference_s": 0.41052149300230667,
+      "finite": true,
+      "cosine": 0.9999306479574754,
+      "normalized_l2": 0.011787943167458192,
+      "mae": 0.00017286519627184987,
+      "max_abs": 0.001672305166721344
+    }
+  ]
+}

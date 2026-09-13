@@ -1,0 +1,12 @@
+{
+  "pid": 18448,
+  "runs": 30,
+  "wall_s": 13.445609674000025,
+  "process_cpu_s": 2.69,
+  "process_cpu_utilization": 20.006530497473037,
+  "mean_inference_ms": 448.1869891333342,
+  "npu_load_samples": 627,
+  "npu_peak_load_percent": 87,
+  "npu_active_samples": 627,
+  "npu_peak_freq_hz": 300000000
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "audio8-asr-rk3576-audio-encoder-v1",
+  "model": "audio_encoder_f800_w4a16.rknn",
+  "manifest": "manifest.json",
+  "load_s": 0.12875615298980847,
+  "init_s": 0.569231872970704,
+  "repeat": 5,
+  "data_format": "none",
+  "samples": [
+    {
+      "index": 0,
+      "mean_inference_s": 0.34471391899278386,
+      "min_inference_s": 0.328959769976791,
+      "finite": true,
+      "cosine": 0.9147564512122713,
+      "normalized_l2": 0.42010554404400696,
+      "mae": 0.006248707369049349,
+      "max_abs": 0.05228569358587265
+    },
+    {
+      "index": 1,
+      "mean_inference_s": 0.3611532678012736,
+      "min_inference_s": 0.35382352001033723,
+      "finite": true,
+      "cosine": 0.8926965589079991,
+      "normalized_l2": 0.4745195802466408,
+      "mae": 0.006869291866347054,
+      "max_abs": 0.09466581232845783
+    },
+    {
+      "index": 2,
+      "mean_inference_s": 0.3599643834051676,
+      "min_inference_s": 0.35777797002810985,
+      "finite": true,
+      "cosine": 0.8784051748361343,
+      "normalized_l2": 0.5185697586996263,
+      "mae": 0.007000779024555289,
+      "max_abs": 0.09774818643927574
+    },
+    {
+      "index": 3,
+      "mean_inference_s": 0.3605616197921336,
+      "min_inference_s": 0.3583101529511623,
+      "finite": true,
+      "cosine": 0.8843028967184501,
+      "normalized_l2": 0.5093551984242098,
+      "mae": 0.006953564671484259,
+      "max_abs": 0.10470949113368988
+    },
+    {
+      "index": 4,
+      "mean_inference_s": 0.3565423947991803,
+      "min_inference_s": 0.34539595403475687,
+      "finite": true,
+      "cosine": 0.84984927076794,
+      "normalized_l2": 0.5757168087261699,
+      "mae": 0.0075152757566748,
+      "max_abs": 0.09076280519366264
+    },
+    {
+      "index": 5,
+      "mean_inference_s": 0.36087044079322367,
+      "min_inference_s": 0.3577431869925931,
+      "finite": true,
+      "cosine": 0.8660484540713217,
+      "normalized_l2": 0.5364392991754786,
+      "mae": 0.007194197526377271,
+      "max_abs": 0.10113443434238434
+    },
+    {
+      "index": 6,
+      "mean_inference_s": 0.36083016559714454,
+      "min_inference_s": 0.3563125570071861,
+      "finite": true,
+      "cosine": 0.8642129760371087,
+      "normalized_l2": 0.5353106258557473,
+      "mae": 0.007329744747048634,
+      "max_abs": 0.08853893540799618
+    },
+    {
+      "index": 7,
+      "mean_inference_s": 0.3606233721948229,
+      "min_inference_s": 0.35974345897557214,
+      "finite": true,
+      "cosine": 0.9020002555115133,
+      "normalized_l2": 0.4436551844555047,
+      "mae": 0.006459373756306034,
+      "max_abs": 0.06785525009036064
+    }
+  ]
+}

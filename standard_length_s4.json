@@ -1,0 +1,30 @@
+{
+  "backend": "original PyTorch CPU FP32 eager",
+  "audio": "/root/audio8-asr/length_test_audio/s4.wav",
+  "prefill_sequence": 60,
+  "tokens": [
+    12275,
+    13,
+    3406,
+    2044,
+    374,
+    279,
+    38471,
+    273,
+    315,
+    279,
+    6149,
+    6846,
+    11,
+    323,
+    582,
+    525,
+    15713,
+    13,
+    151645
+  ],
+  "complete_to_eos": true,
+  "eos_id": 151645,
+  "text": "Mr. Quilter is the apostle of the middle classes, and we are glad.",
+  "generation_wall_ms": 830.6118909999896
+}

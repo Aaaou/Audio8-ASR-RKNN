@@ -1,0 +1,88 @@
+{
+  "backend": "PyTorch CPU FP32 original model",
+  "normalization": "lowercase, punctuation removed, whitespace collapsed; CER excludes spaces",
+  "samples": [
+    {
+      "index": 0,
+      "id": "1272-128104-0000",
+      "audio": "/root/audio8-asr/librispeech_dummy5/audio/00_1272-128104-0000.wav",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "sampling_rate": 16000,
+      "duration_s": 5.855,
+      "hypothesis": "Mr. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+      "reference_normalized": "mister quilter is the apostle of the middle classes and we are glad to welcome his gospel",
+      "hypothesis_normalized": "mr quilter is the apostle of the middle classes and we are glad to welcome his gospel",
+      "wer": 0.058823529411764705,
+      "cer": 0.0547945205479452,
+      "elapsed_s": 1.0141412849999938,
+      "rtf": 0.1732094423569588
+    },
+    {
+      "index": 1,
+      "id": "1272-128104-0001",
+      "audio": "/root/audio8-asr/librispeech_dummy5/audio/01_1272-128104-0001.wav",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "sampling_rate": 16000,
+      "duration_s": 4.815,
+      "hypothesis": "Nor is Mister Quilter's manner less interesting than his matter.",
+      "reference_normalized": "nor is mister quilter s manner less interesting than his matter",
+      "hypothesis_normalized": "nor is mister quilter s manner less interesting than his matter",
+      "wer": 0.0,
+      "cer": 0.0,
+      "elapsed_s": 0.6254852280000023,
+      "rtf": 0.12990347414330264
+    },
+    {
+      "index": 2,
+      "id": "1272-128104-0002",
+      "audio": "/root/audio8-asr/librispeech_dummy5/audio/02_1272-128104-0002.wav",
+      "reference": "HE TELLS US THAT AT THIS FESTIVE SEASON OF THE YEAR WITH CHRISTMAS AND ROAST BEEF LOOMING BEFORE US SIMILES DRAWN FROM EATING AND ITS RESULTS OCCUR MOST READILY TO THE MIND",
+      "sampling_rate": 16000,
+      "duration_s": 12.485,
+      "hypothesis": "He tells us that at this festive season of the year, with Christmas and roast beef looming before us, similarly drawn from eating and its results occur most readily to the mind.",
+      "reference_normalized": "he tells us that at this festive season of the year with christmas and roast beef looming before us similes drawn from eating and its results occur most readily to the mind",
+      "hypothesis_normalized": "he tells us that at this festive season of the year with christmas and roast beef looming before us similarly drawn from eating and its results occur most readily to the mind",
+      "wer": 0.03125,
+      "cer": 0.028368794326241134,
+      "elapsed_s": 1.5499486580000053,
+      "rtf": 0.12414486647977616
+    },
+    {
+      "index": 3,
+      "id": "1272-128104-0003",
+      "audio": "/root/audio8-asr/librispeech_dummy5/audio/03_1272-128104-0003.wav",
+      "reference": "HE HAS GRAVE DOUBTS WHETHER SIR FREDERICK LEIGHTON'S WORK IS REALLY GREEK AFTER ALL AND CAN DISCOVER IN IT BUT LITTLE OF ROCKY ITHACA",
+      "sampling_rate": 16000,
+      "duration_s": 9.9,
+      "hypothesis": "He has grave doubts whether Sir Frederick Layton's work is really Greek after all, and can discover in it but little of Rocky Ithaca.",
+      "reference_normalized": "he has grave doubts whether sir frederick leighton s work is really greek after all and can discover in it but little of rocky ithaca",
+      "hypothesis_normalized": "he has grave doubts whether sir frederick layton s work is really greek after all and can discover in it but little of rocky ithaca",
+      "wer": 0.04,
+      "cer": 0.03669724770642202,
+      "elapsed_s": 1.227427855000002,
+      "rtf": 0.12398261161616181
+    },
+    {
+      "index": 4,
+      "id": "1272-128104-0004",
+      "audio": "/root/audio8-asr/librispeech_dummy5/audio/04_1272-128104-0004.wav",
+      "reference": "LINNELL'S PICTURES ARE A SORT OF UP GUARDS AND AT EM PAINTINGS AND MASON'S EXQUISITE IDYLLS ARE AS NATIONAL AS A JINGO POEM MISTER BIRKET FOSTER'S LANDSCAPES SMILE AT ONE MUCH IN THE SAME WAY THAT MISTER CARKER USED TO FLASH HIS TEETH AND MISTER JOHN COLLIER GIVES HIS SITTER A CHEERFUL SLAP ON THE BACK BEFORE HE SAYS LIKE A SHAMPOOER IN A TURKISH BATH NEXT MAN",
+      "sampling_rate": 16000,
+      "duration_s": 29.4,
+      "hypothesis": "Linille's pictures are a sort of up guards and Adam paintings, and Mason's exquisite itals are as national as a jingo poem. Mister Burke at Foster's landscapes smile at one much in the same way that Mister Cockerer used to flash his teeth. And Mister John Collier gives his sitter a cheerful slap on the back before he says like a shampooer in a Turkish bath. Next man.",
+      "reference_normalized": "linnell s pictures are a sort of up guards and at em paintings and mason s exquisite idylls are as national as a jingo poem mister birket foster s landscapes smile at one much in the same way that mister carker used to flash his teeth and mister john collier gives his sitter a cheerful slap on the back before he says like a shampooer in a turkish bath next man",
+      "hypothesis_normalized": "linille s pictures are a sort of up guards and adam paintings and mason s exquisite itals are as national as a jingo poem mister burke at foster s landscapes smile at one much in the same way that mister cockerer used to flash his teeth and mister john collier gives his sitter a cheerful slap on the back before he says like a shampooer in a turkish bath next man",
+      "wer": 0.09859154929577464,
+      "cer": 0.04794520547945205,
+      "elapsed_s": 3.4341732359999924,
+      "rtf": 0.1168086134693875
+    }
+  ],
+  "aggregate": {
+    "wer": 0.0641025641025641,
+    "cer": 0.038922155688622756,
+    "total_audio_s": 62.455,
+    "total_transcribe_s": 7.851176261999996,
+    "rtf": 0.12570933091025532
+  }
+}

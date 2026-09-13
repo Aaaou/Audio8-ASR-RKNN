@@ -1,0 +1,40 @@
+{
+  "backend": "cpu audio encoder plus PyTorch CPU FP32 adapter/projector/Qwen2 decoder",
+  "fixed_audio_seconds": 8,
+  "samples": [
+    {
+      "index": 0,
+      "id": "1272-128104-0000",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/00_1272-128104-0000.wav",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "sampling_rate": 16000,
+      "speech_duration_s": 5.855,
+      "duration_s": 8.0,
+      "hypothesis": "",
+      "encoder_s": 0.4910863300001438,
+      "decoder_s": 0.2927346370001942,
+      "wer": 1.0,
+      "cer": 1.0
+    },
+    {
+      "index": 1,
+      "id": "1272-128104-0001",
+      "audio": "/root/audio8-asr/librispeech_dummy8s2/audio/01_1272-128104-0001.wav",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "sampling_rate": 16000,
+      "speech_duration_s": 4.815,
+      "duration_s": 8.0,
+      "hypothesis": "",
+      "encoder_s": 0.2840845870000521,
+      "decoder_s": 0.13049937499999942,
+      "wer": 1.0,
+      "cer": 1.0
+    }
+  ],
+  "aggregate": {
+    "wer": 1.0,
+    "cer": 1.0,
+    "mean_encoder_s": 0.38758545850009796,
+    "mean_decoder_s": 0.2116170060000968
+  }
+}
