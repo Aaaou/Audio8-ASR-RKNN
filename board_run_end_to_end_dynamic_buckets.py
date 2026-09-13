@@ -10,17 +10,20 @@ def rss():
   if x.startswith('VmRSS:'):return int(x.split()[1])/1024
 def st(x):
  a=np.asarray(x)*1000;return {'mean':float(a.mean()),'p50':float(np.percentile(a,50)),'p95':float(np.percentile(a,95))}
-a=argparse.ArgumentParser();a.add_argument('--input-dir',type=Path,required=True);a.add_argument('--prefill-rknn',type=Path,required=True);a.add_argument('--adapter-rknn',type=Path,default=Path('/root/audio8-asr/audio_adapter_h104_t100/audio_adapter_h104_t100_fp16.rknn'));a.add_argument('--model',type=Path,required=True);a.add_argument('--max-new',type=int,default=400);a.add_argument('--ignore-eos',action='store_true',help='scheduler stress mode: continue greedy decoding after EOS');a.add_argument('--output',type=Path,required=True);z=a.parse_args();inp=z.input_dir;cfg=json.loads((z.model/'config.json').read_text());eos={cfg['eos_token_id']} if isinstance(cfg['eos_token_id'],int) else set(cfg['eos_token_id']);allr=[];before=rss();total=time.perf_counter()
+a=argparse.ArgumentParser();a.add_argument('--input-dir',type=Path,required=True);a.add_argument('--prefill-rknn',type=Path,required=True);a.add_argument('--asset-root',type=Path,help='release root; uses legacy board paths when omitted');a.add_argument('--adapter-rknn',type=Path);a.add_argument('--model',type=Path,required=True);a.add_argument('--max-new',type=int,default=400);a.add_argument('--ignore-eos',action='store_true',help='scheduler stress mode: continue greedy decoding after EOS');a.add_argument('--output',type=Path,required=True);z=a.parse_args();inp=z.input_dir;cfg=json.loads((z.model/'config.json').read_text());eos={cfg['eos_token_id']} if isinstance(cfg['eos_token_id'],int) else set(cfg['eos_token_id']);allr=[];before=rss();total=time.perf_counter()
+root=z.asset_root
+def asset(release,legacy): return root/release if root else Path(legacy)
+adapter=z.adapter_rknn or asset('adapter/audio_adapter_h104_t100_fp16.rknn','/root/audio8-asr/audio_adapter_h104_t100/audio_adapter_h104_t100_fp16.rknn')
 try:
- enc=load('/root/audio8-asr/encoder_f800_v2/audio_encoder_f800_fp16.rknn');adp=load(z.adapter_rknn);pre=load(z.prefill_rknn);allr=[enc,adp,pre]
- mel=np.load(inp/'input_features.npy').astype('float32');ids=np.load(inp/'input_ids.npy').reshape(-1);audio_pos=np.load(inp/'audio_positions.npy').reshape(-1);table=np.load('/root/audio8-asr/decoder_3d_fixed_s256/token_embeddings_fp32.npy',mmap_mode='r');t=time.perf_counter();e=enc.inference(inputs=[mel])[0];enc_s=time.perf_counter()-t;t=time.perf_counter();audio=adp.inference(inputs=[e])[0];adp_s=time.perf_counter()-t
+ enc=load(asset('encoder/audio_encoder_f800_fp16.rknn','/root/audio8-asr/encoder_f800_v2/audio_encoder_f800_fp16.rknn'));adp=load(adapter);pre=load(z.prefill_rknn);allr=[enc,adp,pre]
+ mel=np.load(inp/'input_features.npy').astype('float32');ids=np.load(inp/'input_ids.npy').reshape(-1);audio_pos=np.load(inp/'audio_positions.npy').reshape(-1);table=np.load(asset('token_embeddings_fp32.npy','/root/audio8-asr/decoder_3d_fixed_s256/token_embeddings_fp32.npy'),mmap_mode='r');t=time.perf_counter();e=enc.inference(inputs=[mel])[0];enc_s=time.perf_counter()-t;t=time.perf_counter();audio=adp.inference(inputs=[e])[0];adp_s=time.perf_counter()-t
  if len(audio) != len(audio_pos): raise RuntimeError(f'adapter tokens {len(audio)} != audio placeholders {len(audio_pos)}')
  embed=np.asarray(table[ids],np.float32)[None,:,:];embed[0,audio_pos,:]=audio;t=time.perf_counter();po=pre.inference(inputs=[embed]);pre_s=time.perf_counter()-t
  for r in allr:r.release()
- allr=[];kvs=[load('/root/audio8-asr/decoder_3d_fixed_s128/layer%d/kv_fp16.rknn'%i) for i in range(8)];heads=[load('/root/audio8-asr/decoder_3d_fixed_s128/head_shards/shard%02d/head_fp16.rknn'%i) for i in range(8)];allr=kvs+heads;blocks={};capacity=128
+ allr=[];kvs=[load(asset(f'decoder/kv/layer{i}/kv_fp16.rknn',f'/root/audio8-asr/decoder_3d_fixed_s128/layer{i}/kv_fp16.rknn')) for i in range(8)];heads=[load(asset(f'decoder/head_shards/shard{i:02d}/head_fp16.rknn',f'/root/audio8-asr/decoder_3d_fixed_s128/head_shards/shard{i:02d}/head_fp16.rknn')) for i in range(8)];allr=kvs+heads;blocks={};capacity=128
  def get_blocks(c):
   if c not in blocks:
-   blocks[c]=[load(f'/root/audio8-asr/decoder_3d_fixed_s{c}/layer{i}/block_fp16.rknn') for i in range(8)];allr.extend(blocks[c])
+   blocks[c]=[load(asset(f'decoder/block_s{c}/layer{i}/block_fp16.rknn',f'/root/audio8-asr/decoder_3d_fixed_s{c}/layer{i}/block_fp16.rknn')) for i in range(8)];allr.extend(blocks[c])
   return blocks[c]
  initial=po[1].shape[-2];ck=[];cv=[]
  for i in range(8):

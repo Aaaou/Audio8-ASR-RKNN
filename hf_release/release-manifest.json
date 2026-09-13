@@ -1,0 +1,9 @@
+{
+  "release": "Audio8-ASR-0.1B RK3576 FP16 RKNN dynamic-KV deployment",
+  "base_model": "Edge0/Audio8-ASR-0.1B",
+  "target": "RK3576 / RKNN Runtime 2.3.2 / RKNPU driver 0.9.8",
+  "cache_layout": "8 layers x K/V [8, Smax, 64] FP32, CPU-owned",
+  "cache_buckets": [128, 256, 512],
+  "excluded": ["upstream weights", "audio", "ONNX", "calibration tensors"],
+  "source_archive": "https://github.com/Aaaou/Audio8-ASR-RKNN/tree/rknn-dynamic-kv-cache-validated"
+}
