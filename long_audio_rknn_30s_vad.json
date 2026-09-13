@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "worker": "persistent-rknn",
+  "tasks": [
+    {
+      "index": 0,
+      "profile": "s8",
+      "tokens": [
+        50597,
+        321,
+        594,
+        9185,
+        525,
+        264,
+        3378,
+        315,
+        13,
+        151645
+      ],
+      "complete_to_eos": true,
+      "initial_prefill": 110,
+      "final_bucket": 128,
+      "bucket_switches": [],
+      "latency_ms": {
+        "encoder": 407.42496700113406,
+        "adapter": 52.50706300284946,
+        "prefill": 122.81936200452037,
+        "decoder_npu_total": 2909.3233790554223,
+        "cpu_kv_total": 2.6769829928525724,
+        "neural_total": 3494.7517540567787,
+        "task_wall_total": 10304.4123389991
+      },
+      "rss_mib": {
+        "frontend_stage": 1407.48046875,
+        "decoder_stage": 1015.609375
+      }
+    },
+    {
+      "index": 1,
+      "profile": "s8",
+      "tokens": [
+        16780,
+        2347,
+        323,
+        15037,
+        35592,
+        13,
+        151645
+      ],
+      "complete_to_eos": true,
+      "initial_prefill": 110,
+      "final_bucket": 128,
+      "bucket_switches": [],
+      "latency_ms": {
+        "encoder": 393.2007390030776,
+        "adapter": 52.22643299930496,
+        "prefill": 102.36041699681664,
+        "decoder_npu_total": 2406.3096049940214,
+        "cpu_kv_total": 1.7132769717136398,
+        "neural_total": 2955.810470964934,
+        "task_wall_total": 9508.996129996376
+      },
+      "rss_mib": {
+        "frontend_stage": 1430.265625,
+        "decoder_stage": 1019.81640625
+      }
+    },
+    {
+      "index": 2,
+      "profile": "s8",
+      "tokens": [
+        3036,
+        28827,
+        594,
+        58608,
+        877,
+        642,
+        525,
+        438,
+        5313,
+        438,
+        264,
+        502,
+        27908,
+        32794,
+        13,
+        151645
+      ],
+      "complete_to_eos": true,
+      "initial_prefill": 110,
+      "final_bucket": 128,
+      "bucket_switches": [],
+      "latency_ms": {
+        "encoder": 400.02789800200844,
+        "adapter": 59.6723380003823,
+        "prefill": 139.61989199742675,
+        "decoder_npu_total": 3981.5732301140088,
+        "cpu_kv_total": 4.880248015979305,
+        "neural_total": 4585.773606129806,
+        "task_wall_total": 11095.831451995764
+      },
+      "rss_mib": {
+        "frontend_stage": 1560.484375,
+        "decoder_stage": 1036.61328125
+      }
+    },
+    {
+      "index": 3,
+      "profile": "s8",
+      "tokens": [
+        12275,
+        13,
+        59529,
+        7066,
+        38174,
+        594,
+        54790,
+        15289,
+        518,
+        825,
+        1753,
+        304,
+        279,
+        1852,
+        1616,
+        429,
+        4392,
+        13,
+        356,
+        12856,
+        1483,
+        311,
+        8217,
+        806,
+        17832,
+        13,
+        151645
+      ],
+      "complete_to_eos": true,
+      "initial_prefill": 110,
+      "final_bucket": 256,
+      "bucket_switches": [
+        {
+          "at_position": 128,
+          "from": 128,
+          "to": 256,
+          "cpu_cache_copy_ms": 38.232055005209986
+        }
+      ],
+      "latency_ms": {
+        "encoder": 385.9191359952092,
+        "adapter": 45.20814800343942,
+        "prefill": 107.92636599944672,
+        "decoder_npu_total": 8000.052843839512,
+        "cpu_kv_total": 8.438868979283143,
+        "neural_total": 8547.54536281689,
+        "task_wall_total": 15078.15347200085
+      },
+      "rss_mib": {
+        "frontend_stage": 1662.30859375,
+        "decoder_stage": 1068.10546875
+      }
+    },
+    {
+      "index": 4,
+      "profile": "s16",
+      "tokens": [
+        3036,
+        91608,
+        3757,
+        4254,
+        5623,
+        6696,
+        806,
+        2444,
+        465,
+        264,
+        70314,
+        50052,
+        389,
+        279,
+        1182,
+        13,
+        13235,
+        566,
+        2727,
+        11,
+        1075,
+        264,
+        61932,
+        261,
+        304,
+        264,
+        23734,
+        8885,
+        11,
+        1790,
+        883,
+        13,
+        151645
+      ],
+      "complete_to_eos": true,
+      "initial_prefill": 210,
+      "final_bucket": 256,
+      "bucket_switches": [],
+      "latency_ms": {
+        "encoder": 821.2333859992214,
+        "adapter": 116.61516500316793,
+        "prefill": 271.51053200213937,
+        "decoder_npu_total": 7591.211284066958,
+        "cpu_kv_total": 9.451930956856813,
+        "neural_total": 8810.022298028343,
+        "task_wall_total": 16428.762036004628
+      },
+      "rss_mib": {
+        "frontend_stage": 1581.9140625,
+        "decoder_stage": 1043.984375
+      }
+    }
+  ],
+  "summary": {
+    "segments": 5,
+    "all_eos": true,
+    "neural_total_ms": 28393.903491996753,
+    "worker_wall_ms": 63146.10662600171,
+    "rss_after_initial_load_mib": 35.41796875,
+    "rss_before_release_mib": 288.6953125
+  }
+}

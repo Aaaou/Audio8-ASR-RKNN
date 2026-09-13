@@ -38,6 +38,12 @@ It records real EOS tests at 2/4/6/8 seconds, all token-identical to original
 PyTorch CPU FP32 (`CER=0%`, `WER=0%`), plus an EOS-ignored cache stress run that
 actually verifies `128→256→512` against 181 FP32 reference tokens.
 
+The production-oriented long-audio path is documented in
+[long_audio_deployment_acceptance.zh-CN.md](long_audio_deployment_acceptance.zh-CN.md).
+It adds VAD segmentation, bounded 8/16/30-second frontend profiles,
+per-segment KV reset, a memory-safe RK3576 staged worker and FP32/RKNN
+acceptance for the same deployment padding contract.
+
 ## Important entry points
 
 - `board_run_end_to_end_dynamic_buckets.py` — RK3576 full neural runtime.
@@ -47,6 +53,9 @@ actually verifies `128→256→512` against 181 FP32 reference tokens.
   static bucket exports, including the T25/T50/T75/T100 adapter variants.
 - `generate_length_standard_reference.py` and
   `generate_forced_decoder_reference.py` — deterministic FP32 references.
+- `long_audio_segmenter.py`, `prepare_deployment_bucket_inputs.py`,
+  `board_run_long_audio.py`, `compare_long_audio_acceptance.py` — long-audio
+  planning, input preparation, RK3576 execution and acceptance comparison.
 
 ## Scope and licensing
 
